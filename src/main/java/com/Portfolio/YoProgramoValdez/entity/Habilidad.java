@@ -45,4 +45,13 @@ public class Habilidad {
     public void setPorcentajeHabilidad(int porcentajeHabilidad) {
         this.porcentajeHabilidad = porcentajeHabilidad;
     }
+
+    @Override
+    public String toString(){
+        return "Habilidades {" +
+                "id=" + id + '\'' +
+                "Habilidad=" + nombreHabilidad + '\'' +
+                "Porcentaje=" + porcentajeHabilidad + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,8 @@
 package com.Portfolio.YoProgramoValdez.controller;
 
 import com.Portfolio.YoProgramoValdez.DTO.Mensaje;
+import com.Portfolio.YoProgramoValdez.entity.Educacion;
+import com.Portfolio.YoProgramoValdez.entity.Experiencia;
 import com.Portfolio.YoProgramoValdez.entity.Habilidad;
 import com.Portfolio.YoProgramoValdez.service.HabilidadService;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +28,6 @@ public class HabilidadController {
         List<Habilidad> lista = habilidadService.getList();
         return new ResponseEntity<List<Habilidad>>(lista, HttpStatus.OK);
     }
-
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nueva")
     public ResponseEntity<?> create(@RequestBody Habilidad habilidad){
@@ -38,20 +39,11 @@ public class HabilidadController {
         return new ResponseEntity(new Mensaje("Nueva Habilidad Agregada"), HttpStatus.CREATED);
     }
 
+    @PutMapping("/editar")
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/editar/{id}")
-    public ResponseEntity<?> update(@RequestBody Habilidad habilidad, @PathVariable("id") Long id){
-        if(!habilidadService.existsHabilidadId(id))
-            return new ResponseEntity(new Mensaje("No Existe la Habilidad Indicada"), HttpStatus.NOT_FOUND);
-        if((Integer)habilidad.getPorcentajeHabilidad() == null || habilidad.getPorcentajeHabilidad()==0)
-            return new ResponseEntity(new Mensaje("El procentaje de la Habilidad es Obligatorio"), HttpStatus.BAD_REQUEST);
-
-        Habilidad habUpdate = habilidadService.getHabilidadId(id).get();
-        habUpdate.setNombreHabilidad(habilidad.getNombreHabilidad());
-        habUpdate.setPorcentajeHabilidad(habilidad.getPorcentajeHabilidad());
-        habilidadService.save(habUpdate);
-
-        return new ResponseEntity(new Mensaje("Habilidad Actualizada"), HttpStatus.CREATED);
+    public ResponseEntity<Habilidad> editar(@RequestBody Habilidad habilidad){
+        Habilidad editarHabilidad = habilidadService.editarHabilidad(habilidad);
+        return new ResponseEntity<>(editarHabilidad, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

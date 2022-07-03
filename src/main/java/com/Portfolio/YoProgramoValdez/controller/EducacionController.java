@@ -2,6 +2,7 @@ package com.Portfolio.YoProgramoValdez.controller;
 
 import com.Portfolio.YoProgramoValdez.DTO.Mensaje;
 import com.Portfolio.YoProgramoValdez.entity.Educacion;
+import com.Portfolio.YoProgramoValdez.entity.Experiencia;
 import com.Portfolio.YoProgramoValdez.service.EducacionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,27 +39,13 @@ public class EducacionController {
         educacionService.save(educacion);
         return new ResponseEntity(new Mensaje("Nueva Campo Agregado en Educación"), HttpStatus.CREATED);
     }
+    @PutMapping("/editar")
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/editar/{id}")
-    public ResponseEntity<?> update(@RequestBody Educacion educacion, @PathVariable("id") Long id){
-        if(!educacionService.existsEducacionId(id))
-            return new ResponseEntity(new Mensaje("No Existe este Campo"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(educacion.getTituloEducacion()))
-            return new ResponseEntity(new Mensaje("El Titulo es Obligatorio"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(educacion.getInstitucionEducacion()))
-            return new ResponseEntity(new Mensaje("La Institución es Obligatoria"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(educacion.getTiempoEducacion()))
-            return new ResponseEntity(new Mensaje("El Período Cursado es Obligatorio"), HttpStatus.BAD_REQUEST);
-
-        Educacion educUpdate = educacionService.getEducacionId(id).get();
-        educUpdate.setTituloEducacion(educacion.getTituloEducacion());
-        educUpdate.setInstitucionEducacion(educacion.getInstitucionEducacion());
-        educUpdate.setTiempoEducacion(educacion.getTiempoEducacion());
-        educUpdate.setUrlEducacion(educacion.getUrlEducacion());
-
-        educacionService.save(educUpdate);
-        return new ResponseEntity(new Mensaje("Campo Actualizado"), HttpStatus.CREATED);
+    public ResponseEntity<Educacion> editar(@RequestBody Educacion educacion){
+        Educacion editarEducacion = educacionService.editarEducacion(educacion);
+        return new ResponseEntity<>(editarEducacion, HttpStatus.OK);
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/borrar/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){

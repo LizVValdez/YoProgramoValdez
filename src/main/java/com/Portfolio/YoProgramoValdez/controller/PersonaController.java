@@ -1,6 +1,7 @@
 package com.Portfolio.YoProgramoValdez.controller;
 
 import com.Portfolio.YoProgramoValdez.DTO.Mensaje;
+import com.Portfolio.YoProgramoValdez.entity.Educacion;
 import com.Portfolio.YoProgramoValdez.entity.Persona;
 import com.Portfolio.YoProgramoValdez.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +20,18 @@ public class PersonaController {
     @Autowired
     PersonaService personaService;
 
-    @GetMapping("/atributos")
-    public ResponseEntity<List<Persona>> getAtributosPersona(){
+    @GetMapping("/datos")
+    public ResponseEntity<List<Persona>> getDatosPersona(){
         List<Persona> lista = personaService.getList();
         return new ResponseEntity<List<Persona>>(lista, HttpStatus.OK);
     }
 
+    @PutMapping("/editar")
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/editar/{id}")
-    public ResponseEntity<?> update(@RequestBody Persona persona, @PathVariable("id") Long id){
-
-        Persona persUpdate = personaService.getPersonaId(id).get();
-        persUpdate.setAcercaDe(persona.getAcercaDe());
-        persUpdate.setNombre(persona.getNombre());
-        persUpdate.setUrlPerfil(persona.getUrlPerfil());
-        persUpdate.setTitulo(persona.getTitulo());
-
-        personaService.save(persUpdate);
-        return new ResponseEntity(new Mensaje("Datos Actualizados"), HttpStatus.CREATED);
+    public ResponseEntity<Persona> editar(@RequestBody Persona persona){
+        Persona editarPersona = personaService.editarPersona(persona);
+        return new ResponseEntity<>(editarPersona, HttpStatus.OK);
     }
+
 
 }

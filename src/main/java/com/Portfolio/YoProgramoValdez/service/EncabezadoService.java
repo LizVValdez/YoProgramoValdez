@@ -1,5 +1,6 @@
 package com.Portfolio.YoProgramoValdez.service;
 
+import com.Portfolio.YoProgramoValdez.entity.Educacion;
 import com.Portfolio.YoProgramoValdez.entity.Encabezado;
 import com.Portfolio.YoProgramoValdez.repository.EncabezadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,7 @@ public class EncabezadoService {
         encabezadoRepository.deleteById(id);
     }
 
-    public boolean existsEncabezadoId(long id){
-        return encabezadoRepository.existsById(id);
+    public Encabezado editarEncabezado(Encabezado encabezado){
+        return encabezadoRepository.save(encabezado);
     }
-
 }

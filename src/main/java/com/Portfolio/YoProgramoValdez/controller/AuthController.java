@@ -3,10 +3,6 @@ package com.Portfolio.YoProgramoValdez.controller;
 import com.Portfolio.YoProgramoValdez.DTO.JwtDTO;
 import com.Portfolio.YoProgramoValdez.DTO.LoginUsuario;
 import com.Portfolio.YoProgramoValdez.DTO.Mensaje;
-import com.Portfolio.YoProgramoValdez.DTO.NuevoUsuario;
-import com.Portfolio.YoProgramoValdez.entity.Rol;
-import com.Portfolio.YoProgramoValdez.entity.Usuario;
-import com.Portfolio.YoProgramoValdez.enums.RolNombre;
 import com.Portfolio.YoProgramoValdez.security.JWT.JwtProvider;
 import com.Portfolio.YoProgramoValdez.service.RolService;
 import com.Portfolio.YoProgramoValdez.service.UsuarioService;
@@ -23,8 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -46,34 +40,6 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
-    @PostMapping("/nuevo")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("campos vacíos o email inválido"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existePorNombre(nuevoUsuario.getNombreUsuario()))
-            return new ResponseEntity(new Mensaje("ese nombre ya existe"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existePorEmail(nuevoUsuario.getEmail()))
-            return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
-        Usuario usuario =
-                new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(),
-                        passwordEncoder.encode(nuevoUsuario.getPassword()));
-        Set<String> rolesStr = nuevoUsuario.getRoles();
-        Set<Rol> roles = new HashSet<>();
-        for (String rol : rolesStr) {
-            switch (rol) {
-                case "admin":
-                    Rol rolAdmin = rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get();
-                    roles.add(rolAdmin);
-                    break;
-                default:
-                    Rol rolUser = rolService.getByRolNombre(RolNombre.ROLE_USER).get();
-                    roles.add(rolUser);
-            }
-        }
-        usuario.setRoles(roles);
-        usuarioService.guardar(usuario);
-        return new ResponseEntity(new Mensaje("usuario guardado"), HttpStatus.CREATED);
-    }
 
     @PostMapping("/login")
     public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){

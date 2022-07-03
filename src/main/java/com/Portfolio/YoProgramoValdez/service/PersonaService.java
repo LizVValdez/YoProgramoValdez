@@ -1,6 +1,7 @@
 package com.Portfolio.YoProgramoValdez.service;
 
 import com.Portfolio.YoProgramoValdez.entity.Persona;
+import com.Portfolio.YoProgramoValdez.entity.Proyecto;
 import com.Portfolio.YoProgramoValdez.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,7 @@ public class PersonaService {
     public boolean existsPersonaId(long id){
         return personaRepository.existsById(id);
     }
-
+    public Persona editarPersona(Persona persona){
+        return personaRepository.save(persona);
+    }
 }

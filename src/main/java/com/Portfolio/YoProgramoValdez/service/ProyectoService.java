@@ -1,5 +1,6 @@
 package com.Portfolio.YoProgramoValdez.service;
 
+import com.Portfolio.YoProgramoValdez.entity.Experiencia;
 import com.Portfolio.YoProgramoValdez.entity.Proyecto;
 import com.Portfolio.YoProgramoValdez.repository.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,7 @@ public class ProyectoService {
         return proyectoRepository.existsById(id);
     }
 
+    public Proyecto editarProyecto(Proyecto proyecto){
+        return proyectoRepository.save(proyecto);
+    }
 }

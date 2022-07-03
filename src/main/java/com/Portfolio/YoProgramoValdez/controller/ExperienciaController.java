@@ -38,26 +38,11 @@ public class ExperienciaController {
         experienciaService.save(experiencia);
         return new ResponseEntity(new Mensaje("Nueva Experiencia Agregada"), HttpStatus.CREATED);
     }
-    @PutMapping("/editar/{id}")
+    @PutMapping("/editar")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> update(@RequestBody Experiencia experiencia, @PathVariable("id") Long id){
-        if(!experienciaService.existsExperienciaId(id))
-            return new ResponseEntity(new Mensaje("La Experiencia Indicada No Existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(experiencia.getTituloExperiencia()))
-            return new ResponseEntity(new Mensaje("El Título es Obligatorio"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(experiencia.getInstitucionExperiencia()))
-            return new ResponseEntity(new Mensaje("La Institución es Obligatoria"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(experiencia.getTiempoExperiencia()))
-            return new ResponseEntity(new Mensaje("El Período Trabajado es Obligatorio"), HttpStatus.BAD_REQUEST);
-
-        Experiencia expUpdate = experienciaService.getExperienciaId(id).get();
-        expUpdate.setTituloExperiencia(experiencia.getTituloExperiencia());
-        expUpdate.setInstitucionExperiencia(experiencia.getInstitucionExperiencia());
-        expUpdate.setTiempoExperiencia(experiencia.getTiempoExperiencia());
-        expUpdate.setUrlExperiencia(experiencia.getUrlExperiencia());
-
-        experienciaService.save(expUpdate);
-        return new ResponseEntity(new Mensaje("La Experiencia fue Actualizada"), HttpStatus.CREATED);
+    public ResponseEntity<Experiencia> editar(@RequestBody Experiencia experiencia){
+        Experiencia editarExperiencia = experienciaService.editarExperiencia(experiencia);
+        return new ResponseEntity<>(editarExperiencia, HttpStatus.OK);
     }
     @DeleteMapping("/borrar/{id}")
     @PreAuthorize("hasRole('ADMIN')")

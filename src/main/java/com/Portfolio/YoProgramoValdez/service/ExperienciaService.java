@@ -36,4 +36,7 @@ public class ExperienciaService {
         return experienciaRepository.existsById(id);
     }
 
+    public Experiencia editarExperiencia(Experiencia experiencia){
+        return experienciaRepository.save(experiencia);
+    }
 }
