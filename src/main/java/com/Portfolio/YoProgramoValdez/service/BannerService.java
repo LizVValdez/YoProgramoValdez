@@ -1,7 +1,6 @@
 package com.Portfolio.YoProgramoValdez.service;
 
-import com.Portfolio.YoProgramoValdez.entity.Educacion;
-import com.Portfolio.YoProgramoValdez.entity.Encabezado;
+import com.Portfolio.YoProgramoValdez.entity.Banner;
 import com.Portfolio.YoProgramoValdez.repository.EncabezadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,23 +16,23 @@ public class EncabezadoService {
     @Autowired
     EncabezadoRepository encabezadoRepository;
 
-    public List<Encabezado> getList(){
+    public List<Banner> getList(){
         return encabezadoRepository.findAll();
     }
 
-    public Optional<Encabezado> getEncabezadoId(long id){
+    public Optional<Banner> getEncabezadoId(long id){
         return encabezadoRepository.findById(id);
     }
 
-    public void save(Encabezado encabezado){
-        encabezadoRepository.save(encabezado);
+    public void save(Banner banner){
+        encabezadoRepository.save(banner);
     }
 
     public void delete(long id){
         encabezadoRepository.deleteById(id);
     }
 
-    public Encabezado editarEncabezado(Encabezado encabezado){
-        return encabezadoRepository.save(encabezado);
+    public Banner editarEncabezado(Banner banner){
+        return encabezadoRepository.save(banner);
     }
 }
