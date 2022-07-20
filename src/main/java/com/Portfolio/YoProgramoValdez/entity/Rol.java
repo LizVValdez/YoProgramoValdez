@@ -35,7 +35,4 @@ public class Rol {
         return rolNombre;
     }
 
-    public void setRolNombre(RolNombre rolNombre) {
-        this.rolNombre = rolNombre;
-    }
 }

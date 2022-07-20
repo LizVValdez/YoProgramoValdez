@@ -3,17 +3,17 @@ package com.Portfolio.YoProgramoValdez.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "encabezado")
-public class Encabezado {
+@Table(name = "Banner")
+public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String urlBanner;
 
-    public Encabezado() {
+    public Banner() {
     }
 
-    public Encabezado(long id, String urlBanner) {
+    public Banner(long id, String urlBanner) {
         this.id = id;
         this.urlBanner = urlBanner;
     }

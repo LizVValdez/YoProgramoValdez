@@ -37,14 +37,6 @@ public class UsuarioPrincipal implements UserDetails {
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

@@ -1,7 +1,6 @@
 package com.Portfolio.YoProgramoValdez.service;
 
 import com.Portfolio.YoProgramoValdez.entity.Educacion;
-import com.Portfolio.YoProgramoValdez.entity.Experiencia;
 import com.Portfolio.YoProgramoValdez.repository.EducacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

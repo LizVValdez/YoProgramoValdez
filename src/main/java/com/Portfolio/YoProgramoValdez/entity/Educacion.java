@@ -65,4 +65,5 @@ public class Educacion {
     public void setTiempoEducacion(String tiempoEducacion) {
         this.tiempoEducacion = tiempoEducacion;
     }
+
 }

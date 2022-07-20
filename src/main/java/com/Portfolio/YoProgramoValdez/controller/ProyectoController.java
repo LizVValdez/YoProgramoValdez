@@ -25,7 +25,6 @@ public class ProyectoController {
         List<Proyecto> lista = proyectoService.getList();
         return new ResponseEntity<List<Proyecto>>(lista, HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nuevo")
     public ResponseEntity<?> create(@RequestBody Proyecto proyecto){
         if(StringUtils.isBlank(proyecto.getNombreProyecto()))
@@ -35,7 +34,6 @@ public class ProyectoController {
         proyectoService.save(proyecto);
         return new ResponseEntity(new Mensaje("Nueva Proyecto Agregado"), HttpStatus.CREATED);
     }
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/editar/{id}")
     public ResponseEntity<?> update(@RequestBody Proyecto proyecto, @PathVariable("id") Long id){
         if(!proyectoService.existsProyectoId(id))
@@ -50,7 +48,6 @@ public class ProyectoController {
         proyectoService.save(proyUpdate);
         return new ResponseEntity(new Mensaje("Proyecto Actualizado"), HttpStatus.CREATED);
     }
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/borrar/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         if(!proyectoService.existsProyectoId(id))

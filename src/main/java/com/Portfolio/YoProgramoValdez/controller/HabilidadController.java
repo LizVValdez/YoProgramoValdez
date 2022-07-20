@@ -1,15 +1,12 @@
 package com.Portfolio.YoProgramoValdez.controller;
 
 import com.Portfolio.YoProgramoValdez.DTO.Mensaje;
-import com.Portfolio.YoProgramoValdez.entity.Educacion;
-import com.Portfolio.YoProgramoValdez.entity.Experiencia;
 import com.Portfolio.YoProgramoValdez.entity.Habilidad;
 import com.Portfolio.YoProgramoValdez.service.HabilidadService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +25,6 @@ public class HabilidadController {
         List<Habilidad> lista = habilidadService.getList();
         return new ResponseEntity<List<Habilidad>>(lista, HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/nueva")
     public ResponseEntity<?> create(@RequestBody Habilidad habilidad){
         if(StringUtils.isBlank(habilidad.getNombreHabilidad()))
@@ -40,13 +36,11 @@ public class HabilidadController {
     }
 
     @PutMapping("/editar")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Habilidad> editar(@RequestBody Habilidad habilidad){
         Habilidad editarHabilidad = habilidadService.editarHabilidad(habilidad);
         return new ResponseEntity<>(editarHabilidad, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/borrar/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         if(!habilidadService.existsHabilidadId(id))

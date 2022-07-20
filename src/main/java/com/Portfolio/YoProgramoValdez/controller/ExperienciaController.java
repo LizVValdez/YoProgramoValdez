@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +26,6 @@ public class ExperienciaController {
     }
 
     @PostMapping("/nueva")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody Experiencia experiencia){
         if(StringUtils.isBlank(experiencia.getTituloExperiencia()))
             return new ResponseEntity(new Mensaje("El Título es Obligatorio"), HttpStatus.BAD_REQUEST);
@@ -39,13 +37,11 @@ public class ExperienciaController {
         return new ResponseEntity(new Mensaje("Nueva Experiencia Agregada"), HttpStatus.CREATED);
     }
     @PutMapping("/editar")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Experiencia> editar(@RequestBody Experiencia experiencia){
         Experiencia editarExperiencia = experienciaService.editarExperiencia(experiencia);
         return new ResponseEntity<>(editarExperiencia, HttpStatus.OK);
     }
     @DeleteMapping("/borrar/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id){
         if(!experienciaService.existsExperienciaId(id))
             return new ResponseEntity(new Mensaje("No Existe la Experiencia Indicada"), HttpStatus.NOT_FOUND);

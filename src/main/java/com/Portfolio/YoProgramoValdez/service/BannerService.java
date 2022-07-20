@@ -1,7 +1,7 @@
 package com.Portfolio.YoProgramoValdez.service;
 
 import com.Portfolio.YoProgramoValdez.entity.Banner;
-import com.Portfolio.YoProgramoValdez.repository.EncabezadoRepository;
+import com.Portfolio.YoProgramoValdez.repository.BannerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,28 +11,28 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class EncabezadoService {
+public class BannerService {
 
     @Autowired
-    EncabezadoRepository encabezadoRepository;
+    BannerRepository bannerRepository;
 
     public List<Banner> getList(){
-        return encabezadoRepository.findAll();
+        return bannerRepository.findAll();
     }
 
-    public Optional<Banner> getEncabezadoId(long id){
-        return encabezadoRepository.findById(id);
+    public Optional<Banner> getBannerId(long id){
+        return bannerRepository.findById(id);
     }
 
     public void save(Banner banner){
-        encabezadoRepository.save(banner);
+        bannerRepository.save(banner);
     }
 
     public void delete(long id){
-        encabezadoRepository.deleteById(id);
+        bannerRepository.deleteById(id);
     }
 
-    public Banner editarEncabezado(Banner banner){
-        return encabezadoRepository.save(banner);
+    public Banner editarBanner(Banner banner){
+        return bannerRepository.save(banner);
     }
 }

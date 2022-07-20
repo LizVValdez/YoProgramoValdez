@@ -9,20 +9,20 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String urlPerfil;
+    private String url_perfil;
     private String nombre;
     private String titulo;
-    private String acercaDe;
+    private String acerca_de;
 
     public Persona() {
     }
 
-    public Persona(long id, String urlPerfil, String nombre, String titulo, String acercaDe) {
+    public Persona(long id, String url_perfil, String nombre, String titulo, String acerca_de) {
         this.id = id;
-        this.urlPerfil = urlPerfil;
+        this.url_perfil = url_perfil;
         this.nombre = nombre;
         this.titulo = titulo;
-        this.acercaDe = acercaDe;
+        this.acerca_de = acerca_de;
     }
 
     public long getId() {
@@ -33,12 +33,12 @@ public class Persona {
         this.id = id;
     }
 
-    public String getUrlPerfil() {
-        return urlPerfil;
+    public String getUrl_perfil() {
+        return url_perfil;
     }
 
-    public void setUrlPerfil(String urlPerfil) {
-        this.urlPerfil = urlPerfil;
+    public void setUrl_perfil(String url_perfil) {
+        this.url_perfil = url_perfil;
     }
 
     public String getNombre() {
@@ -57,11 +57,11 @@ public class Persona {
         this.titulo = titulo;
     }
 
-    public String getAcercaDe() {
-        return acercaDe;
+    public String getAcerca_de() {
+        return acerca_de;
     }
 
-    public void setAcercaDe(String acercaDe) {
-        this.acercaDe = acercaDe;
+    public void setAcerca_de(String acerca_de) {
+        this.acerca_de = acerca_de;
     }
 }

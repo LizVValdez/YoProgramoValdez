@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface EncabezadoRepository extends JpaRepository<Banner,Long> {
+public interface BannerRepository extends JpaRepository<Banner,Long> {
 
     Optional<Banner> findById(Long id);
     boolean existsById(Long id);
