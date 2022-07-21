@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/experiencia")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*")
 
 public class ExperienciaController {
 
