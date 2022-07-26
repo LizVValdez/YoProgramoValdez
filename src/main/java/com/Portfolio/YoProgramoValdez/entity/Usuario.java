@@ -19,10 +19,6 @@ public class Usuario {
     private String nombreUsuario;
 
     @NotNull
-    @Column(unique = true)
-    private String email;
-
-    @NotNull
     private String password;
 
     @NotNull
@@ -33,10 +29,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String email, @NotNull String password) {
+    public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String password) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
-        this.email = email;
         this.password = password;
     }
 
@@ -62,14 +57,6 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {

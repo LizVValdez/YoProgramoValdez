@@ -13,16 +13,19 @@ public class Experiencia {
     private String urlExperiencia;
     private String tituloExperiencia;
     private String institucionExperiencia;
+
+    private String descripcionExperiencia;
     private String tiempoExperiencia;
 
     public Experiencia() {
     }
 
-    public Experiencia(long id, String urlExperiencia, String tituloExperiencia, String institucionExperiencia, String tiempoExperiencia) {
+    public Experiencia(long id, String urlExperiencia, String tituloExperiencia, String institucionExperiencia, String descripcionExperiencia, String tiempoExperiencia) {
         this.id = id;
         this.urlExperiencia = urlExperiencia;
         this.tituloExperiencia = tituloExperiencia;
         this.institucionExperiencia = institucionExperiencia;
+        this.descripcionExperiencia = descripcionExperiencia;
         this.tiempoExperiencia = tiempoExperiencia;
     }
 
@@ -56,6 +59,14 @@ public class Experiencia {
 
     public void setInstitucionExperiencia(String institucionExperiencia) {
         this.institucionExperiencia = institucionExperiencia;
+    }
+
+    public String getDescripcionExperiencia() {
+        return descripcionExperiencia;
+    }
+
+    public void setDescripcionExperiencia(String descripcionExperiencia) {
+        this.descripcionExperiencia = descripcionExperiencia;
     }
 
     public String getTiempoExperiencia() {
